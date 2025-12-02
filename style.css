@@ -1,0 +1,204 @@
+/* =========================
+   STYLE WEBSITE ENERGI 2025 (MERGED + FIX TOUCH SCROLL + NUMBERING)
+   ========================= */
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  text-align: center;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  overflow-x: hidden;
+}
+
+/* ======== CARD / BOX UTAMA ======== */
+.container {
+  width: 90%;
+  max-width: 750px;
+  padding: 25px 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  animation: fadeIn 1.2s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-height: 80vh;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ======== LOGO LANDSCAPE ======== */
+.logo {
+  width: 85%;
+  max-width: 420px;
+  aspect-ratio: 3/1;
+  object-fit: contain;
+  border-radius: 10px;
+  background-color: rgba(255,255,255,0.08);
+  padding: 6px;
+  animation: float 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px #00eaff);
+  margin-top: 5px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ======== TEKS ======== */
+h1 {
+  font-size: 1.6em;
+  margin: 0;
+  background: linear-gradient(90deg, #00eaff, #ffce00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glowText 2s infinite alternate;
+}
+
+@keyframes glowText {
+  from { text-shadow: 0 0 10px #00eaff; }
+  to { text-shadow: 0 0 25px #ffce00; }
+}
+
+p {
+  font-size: 1em;
+  margin: 0 0 10px 0;
+  color: #d8e8f0;
+  line-height: 1.5;
+  max-width: 90%;
+}
+
+/* ======== TOMBOL ======== */
+button {
+  background: linear-gradient(90deg, #00eaff, #ffce00);
+  color: #000;
+  border: none;
+  padding: 12px 28px;
+  font-size: 1.05em;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  box-shadow: 0 0 15px rgba(255,255,255,0.25);
+  animation: pulseBtn 1.8s ease-in-out infinite;
+}
+
+button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 30px rgba(255,255,255,0.6);
+}
+
+@keyframes pulseBtn {
+  0% { box-shadow: 0 0 10px #00eaff; }
+  50% { box-shadow: 0 0 25px #ffce00; }
+  100% { box-shadow: 0 0 10px #00eaff; }
+}
+
+/* ======== GRID PEMENANG + NUMBERING ======== */
+.winner-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 10px;
+  counter-reset: winner-counter;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* CARD PEMENANG + NUMBERING SEBELAH KANAN */
+.winner-card {
+  counter-increment: winner-counter;
+  position: relative;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 10px 60px 10px 14px; /* ruang kanan diperbanyak biar muat angka */
+  text-align: left;
+  font-size: 0.95em;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.2);
+  transition: 0.3s;
+}
+
+.winner-card::before {
+  content: counter(winner-counter) ".";
+  position: absolute;
+  right: 14px;  /* ✅ angka di kanan */
+  top: 10px;
+  font-weight: bold;
+  font-size: 1em;
+  color: #00eaff;
+  text-align: right;
+  min-width: 35px; /* biar digit 1–100 tetap rapi */
+}
+
+.winner-card p {
+  margin: 6px 0;
+  line-height: 1.5;
+}
+
+
+/* ======== RESPONSIVE HP ======== */
+@media (max-width: 768px) {
+  body.winners {
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .container {
+    flex: unset;
+    min-height: unset;
+    gap: 15px;
+  }
+
+  .winner-card {
+    font-size: 0.9em;
+  }
+
+  button {
+    padding: 10px 24px;
+    font-size: 1em;
+  }
+
+  .logo {
+    width: 95%;
+    max-width: 340px;
+  }
+
+  h1 { font-size: 1.4em; }
+  p { font-size: 0.95em; }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 18px;
+    min-height: unset;
+  }
+
+  .winner-card {
+    font-size: 0.88em;
+  }
+
+  .logo {
+    max-width: 300px;
+  }
+
+  h1 { font-size: 1.25em; }
+  p { font-size: 0.9em; }
+}
